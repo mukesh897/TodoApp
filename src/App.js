@@ -8,8 +8,12 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      items: [],
+      items: [{ text: 'Ritesh', key: 1 }, { text: 'Mukesh', key: 2 }],
       currentItem: {
+        text: '',
+        key: '',
+      },
+      editedItem: {
         text: '',
         key: '',
       },
@@ -24,13 +28,33 @@ class App extends Component {
     })
   }
 
+  editItem = key => {
+    document.getElementById(key+"readOnlyItem").style.display = "none";
+    document.getElementById(key+"editableItem").style.display = "block";
+  }
+
+  cancelEditItem = key => {
+    document.getElementById(key+"readOnlyItem").style.display = "block";
+    document.getElementById(key+"editableItem").style.display = "none";
+
+  }
+
   handleInput = e => {
     const itemText = e.target.value
-    const currentItem = { text: itemText, key: Date.now() }
+    var currentItem = { text: itemText, key: Date.now() }
     this.setState({
       currentItem,
     })
   }
+
+  handleEditInput = e => {
+    const itemText = e.target.value
+    var editedItem = { text: itemText, key: Date.now() }
+    this.setState({
+      editedItem,
+    })
+  }
+
   addItem = e => {
     e.preventDefault()
     const newItem = this.state.currentItem
@@ -42,7 +66,12 @@ class App extends Component {
       })
     }
   }
+
+  deleteAndAddItem = key => {
+
+  }
   render() {
+
     return (
       <div className="App">
         <TodoList
@@ -51,7 +80,14 @@ class App extends Component {
           handleInput={this.handleInput}
           currentItem={this.state.currentItem}
         />
-        <TodoItems entries={this.state.items} deleteItem={this.deleteItem} />
+        <TodoItems entries={this.state.items}
+          deleteItem={this.deleteItem}
+          editItem={this.editItem}
+          cancelEditItem = {this.cancelEditItem}
+          handleEditInput = {this.handleEditInput}
+          editedItem = {this.state.editedItem}
+          deleteAndAddItem = {this.deleteAndAddItem}
+        />
       </div>
     )
   }

@@ -1,11 +1,36 @@
 import React, { Component } from 'react'
+import TodoList from './TodoList'
 
 class TodoItems extends Component {
   createTasks = item => {
     return (
-      <li key={item.key} onClick={() => this.props.deleteItem(item.key)}>
-        {item.text}
+
+      <li >
+        <div id={item.key+"readOnlyItem"}>
+          <div>
+            {item.text}
+          </div>
+          <button key={item.key} onClick={() => this.props.deleteItem(item.key)}>
+            Delete Item
+          </button>
+          <button key={item.key} onClick={() => this.props.editItem(item.key)}>
+            Edit Item
+          </button>
+        </div>
+        <div id={item.key+"editableItem"} hidden="true">
+            <input
+              placeholder={item.text}
+              value={this.props.editedItem.text}
+              onChange={this.props.handleEditInput}
+            />
+            <button onClick={() => this.props.deleteAndAddItem(item.key)}> Save edit </button>
+          <button key={item.key} onClick={() => this.props.cancelEditItem(item.key)}>
+            Cancel Edit
+          </button>
+
+        </div>
       </li>
+
     )
   }
   render() {
