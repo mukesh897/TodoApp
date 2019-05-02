@@ -43,7 +43,7 @@ export default class Login extends React.Component {
         <form onSubmit={this.onSubmit.bind(this)} noValidate>
           <input type="email" ref="email" name="email" placeholder="Email"/>
           <input type="password" ref="password" name="password" placeholder="Password"/>
-          <button>Login</button>
+          <button class="waves-effect waves-light btn">Login</button>
         </form>
         <div id="invalidPassword" hidden={true}>
             Sorry, this the userId and password combination do not exist
