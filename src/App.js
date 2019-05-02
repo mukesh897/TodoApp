@@ -65,7 +65,23 @@ class App extends Component {
     const lastUsedKey = this.state.lastUsedKey
     const newKey = lastUsedKey + 1
     const itemText = e.target.value
-    var currentItem = { text: itemText, key: newKey, isComplete: false}
+    var currentItem = { text: itemText, key: newKey, isComplete: false, details: ''}
+    this.setState({
+      currentItem,
+      lastUsedKey: newKey,
+    })
+  }
+
+  handleInputDetails = e => {
+    const lastUsedKey = this.state.lastUsedKey
+    const newKey = lastUsedKey + 1
+    const itemDetails = e.target.value
+    var currentItem = this.state.currentItem
+    console.log("Old current item")
+    console.log(currentItem)
+    currentItem.details = itemDetails
+    console.log("News current item")
+    console.log(currentItem)
     this.setState({
       currentItem,
       lastUsedKey: newKey,
@@ -76,7 +92,7 @@ class App extends Component {
     const lastUsedKey = this.state.lastUsedKey
     const newKey = lastUsedKey + 1
     const itemText = e.target.value
-    var editedItem = { text: itemText, key: newKey, isComplete: false }
+    var editedItem = { text: itemText, key: newKey, isComplete: false, details: '' }
     this.setState({
       editedItem,
       lastUsedKey: newKey,
@@ -133,6 +149,7 @@ class App extends Component {
           addItem={this.addItem}
           inputElement={this.inputElement}
           handleInput={this.handleInput}
+          handleInputDetails = {this.handleInputDetails}
           currentItem={this.state.currentItem}
         />
         <TodoItems entries={this.state.items}
