@@ -65,7 +65,7 @@ class App extends Component {
     const lastUsedKey = this.state.lastUsedKey
     const newKey = lastUsedKey + 1
     const itemText = e.target.value
-    var currentItem = { text: itemText, key: newKey}
+    var currentItem = { text: itemText, key: newKey, isComplete: false}
     this.setState({
       currentItem,
       lastUsedKey: newKey,
@@ -76,7 +76,7 @@ class App extends Component {
     const lastUsedKey = this.state.lastUsedKey
     const newKey = lastUsedKey + 1
     const itemText = e.target.value
-    var editedItem = { text: itemText, key: newKey }
+    var editedItem = { text: itemText, key: newKey, isComplete: false }
     this.setState({
       editedItem,
       lastUsedKey: newKey,
