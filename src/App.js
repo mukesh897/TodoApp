@@ -41,6 +41,19 @@ class App extends Component {
     document.getElementById(key+"editableItem").style.display = "block";
   }
 
+  markDone = key => {
+    console.log("Printing state")
+    console.log(this.state)
+    var items = this.state.items
+    const itemToBeMarkedDone = items.filter(item => {
+      return item.key == key
+    })
+    itemToBeMarkedDone.isComplete = true
+    this.setState({
+        items: items,
+    })
+  }
+
   cancelEditItem = key => {
     document.getElementById(key+"readOnlyItem").style.display = "block";
     document.getElementById(key+"editableItem").style.display = "none";
@@ -118,6 +131,7 @@ class App extends Component {
           cancelEditItem = {this.cancelEditItem}
           handleEditInput = {this.handleEditInput}
           editedItem = {this.state.editedItem}
+          markDone = {this.markDone}
           deleteAndAddItem = {this.deleteAndAddItem}
         />
       </div>

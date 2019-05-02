@@ -7,13 +7,19 @@ class TodoItems extends Component {
       <li key={item.key} >
         <div id={item.key+"readOnlyItem"}>
           <div>
-            {item.text}
+            <span>ItemTitle: {item.text}</span>
+            <br></br>
+            <span>isComplete: {item.isComplete.toString()}</span>
+
           </div>
           <button onClick={() => this.props.deleteItem(item.key)}>
             Delete Item
           </button>
           <button onClick={() => this.props.editItem(item.key)}>
             Edit Item
+          </button>
+          <button onClick={() => this.props.markDone(item.key)}>
+            Mark done
           </button>
         </div>
         <div id={item.key+"editableItem"} hidden={true}>
