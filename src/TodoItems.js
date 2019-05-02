@@ -36,6 +36,12 @@ class TodoItems extends Component {
               value={this.props.editedItem.text}
               onChange={this.props.handleEditInput}
             />
+            <input
+              placeholder={item.details}
+              value={this.props.editedItem.details}
+              onChange={this.props.handleEditInputDetails}
+            />
+
             <button onClick={() => this.props.deleteAndAddItem(item.key)}> Save edit </button>
             <button onClick={() => this.props.cancelEditItem(item.key)}>
               Cancel Edit

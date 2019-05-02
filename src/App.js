@@ -67,7 +67,7 @@ class App extends Component {
     const itemText = e.target.value
     var currentItem = { text: itemText, key: newKey, isComplete: false, details: ''}
     this.setState({
-      currentItem,
+      currentItem: currentItem,
       lastUsedKey: newKey,
     })
   }
@@ -77,13 +77,9 @@ class App extends Component {
     const newKey = lastUsedKey + 1
     const itemDetails = e.target.value
     var currentItem = this.state.currentItem
-    console.log("Old current item")
-    console.log(currentItem)
     currentItem.details = itemDetails
-    console.log("News current item")
-    console.log(currentItem)
     this.setState({
-      currentItem,
+      currentItem: currentItem,
       lastUsedKey: newKey,
     })
   }
@@ -94,7 +90,23 @@ class App extends Component {
     const itemText = e.target.value
     var editedItem = { text: itemText, key: newKey, isComplete: false, details: '' }
     this.setState({
-      editedItem,
+      editedItem: editedItem,
+      lastUsedKey: newKey,
+    })
+  }
+
+  handleEditInputDetails = e => {
+    const lastUsedKey = this.state.lastUsedKey
+    const newKey = lastUsedKey + 1
+    const itemDetails = e.target.value
+    var editedItem = this.state.editedItem
+    console.log("Old edit item")
+    console.log(editedItem)
+    editedItem.details = itemDetails
+    console.log("New edit item")
+    console.log(editedItem)
+    this.setState({
+      editedItem: editedItem,
       lastUsedKey: newKey,
     })
   }
@@ -157,6 +169,7 @@ class App extends Component {
           editItem={this.editItem}
           cancelEditItem = {this.cancelEditItem}
           handleEditInput = {this.handleEditInput}
+          handleEditInputDetails = {this.handleEditInputDetails}
           editedItem = {this.state.editedItem}
           markDone = {this.markDone}
           deleteAndAddItem = {this.deleteAndAddItem}
