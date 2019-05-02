@@ -8,15 +8,23 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      items: [{ text: 'Ritesh', key: 1 }, { text: 'Mukesh', key: 2 }],
+      items: [
+        { text: 'Ritesh', key: 1, isComplete: false, details: "Dummy details" },
+        { text: 'Mukesh', key: 2, isComplete: false, details: "Dummy details" }
+      ],
       currentItem: {
         text: '',
         key: '',
+        isComplete: false,
+        details: '',
       },
       editedItem: {
         text: '',
         key: '',
+        isComplete: false,
+        details: '',
       },
+      lastUsedKey: 2,
     }
   }
   deleteItem = key => {
@@ -40,18 +48,24 @@ class App extends Component {
   }
 
   handleInput = e => {
+    const lastUsedKey = this.state.lastUsedKey
+    const newKey = lastUsedKey + 1
     const itemText = e.target.value
-    var currentItem = { text: itemText, key: Date.now() }
+    var currentItem = { text: itemText, key: newKey}
     this.setState({
       currentItem,
+      lastUsedKey: newKey,
     })
   }
 
   handleEditInput = e => {
+    const lastUsedKey = this.state.lastUsedKey
+    const newKey = lastUsedKey + 1
     const itemText = e.target.value
-    var editedItem = { text: itemText, key: Date.now() }
+    var editedItem = { text: itemText, key: newKey }
     this.setState({
       editedItem,
+      lastUsedKey: newKey,
     })
   }
 
@@ -67,7 +81,25 @@ class App extends Component {
     }
   }
 
-  deleteAndAddItem = key => {
+  deleteAndAddItem = keyToBeDeleted => {
+    const itemsAfterDeletion = this.state.items.filter(item => {
+      return item.key !== keyToBeDeleted
+    })
+    const newItem = this.state.editedItem
+    if (newItem.text !== '') {
+      const items = [...itemsAfterDeletion, newItem]
+      this.setState({
+        items: items,
+        editedItem: { text: '', key: '' },
+      })
+    }
+    // document.getElementById(keyToBeDeleted+"readOnlyItem").style.display = "block";
+    // document.getElementById(keyToBeDeleted+"editableItem").style.display = "none";
+
+    document.getElementById(keyToBeDeleted+"readOnlyItem").remove();
+    document.getElementById(keyToBeDeleted+"editableItem").remove();
+
+
 
   }
   render() {
