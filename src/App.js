@@ -49,7 +49,7 @@ class App extends Component {
       return item.key !== key
     })
     itemToBeMarkedDone.isComplete = true
-    const items = [...filteredItems, itemTo]
+    const items = [...filteredItems, itemToBeMarkedDone]
     this.setState({
         items: items,
     })
