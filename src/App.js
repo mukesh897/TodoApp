@@ -95,6 +95,18 @@ class App extends Component {
     }
   }
 
+  showDetails = key => {
+    document.getElementById(key+"itemDetails").style.display = "block";
+    document.getElementById(key+"hideDetailsButton").style.display = "block";
+    document.getElementById(key+"showDetailsButton").style.display = "none";
+  }
+
+  hideDetails = key => {
+    document.getElementById(key+"itemDetails").style.display = "none";
+    document.getElementById(key+"hideDetailsButton").style.display = "none";
+    document.getElementById(key+"showDetailsButton").style.display = "block";
+  }
+
   deleteAndAddItem = keyToBeDeleted => {
     const itemsAfterDeletion = this.state.items.filter(item => {
       return item.key !== keyToBeDeleted
@@ -112,9 +124,6 @@ class App extends Component {
 
     document.getElementById(keyToBeDeleted+"readOnlyItem").remove();
     document.getElementById(keyToBeDeleted+"editableItem").remove();
-
-
-
   }
   render() {
 
@@ -134,6 +143,8 @@ class App extends Component {
           editedItem = {this.state.editedItem}
           markDone = {this.markDone}
           deleteAndAddItem = {this.deleteAndAddItem}
+          showDetails = {this.showDetails}
+          hideDetails = {this.hideDetails}
         />
       </div>
     )

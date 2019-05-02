@@ -9,6 +9,8 @@ class TodoItems extends Component {
           <div>
             <span>ItemTitle: {item.text}</span>
             <br></br>
+            <span id={item.key+"itemDetails"} hidden={true}>Details: {item.details}</span>
+            <br></br>
             <span>isComplete: {item.isComplete.toString()}</span>
 
           </div>
@@ -20,6 +22,12 @@ class TodoItems extends Component {
           </button>
           <button onClick={() => this.props.markDone(item.key)}>
             Mark done
+          </button>
+          <button id={item.key+"showDetailsButton"} onClick={() => this.props.showDetails(item.key)}>
+            Show Details
+          </button>
+          <button id={item.key+"hideDetailsButton"} hidden={true} onClick={() => this.props.hideDetails(item.key)}>
+            Hide Details
           </button>
         </div>
         <div id={item.key+"editableItem"} hidden={true}>
