@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import TodoList from './TodoList'
 import TodoItems from './TodoItems'
 import ls from 'local-storage'
+import {browserHistory} from 'react-router'
 
 window.onbeforeunload = function() {
 ls.clear();
@@ -14,6 +15,9 @@ class App extends Component {
   inputElement = React.createRef()
   constructor() {
     super()
+    if (!ls.get('isUserAuthenticated')) {
+      browserHistory.replace('/')
+    }
     this.state = {
       items: ls.get('items') || [],
       currentItem: {
@@ -30,6 +34,11 @@ class App extends Component {
       },
       lastUsedKey: 2,
     }
+  }
+
+  logOut() {
+    ls.set('isUserAuthenticated', false)
+    browserHistory.replace('/')
   }
   deleteItem = key => {
     const filteredItems = this.state.items.filter(item => {
@@ -162,6 +171,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <button onClick={this.logOut}>LogOut</button>
         <TodoList
           addItem={this.addItem}
           inputElement={this.inputElement}
