@@ -2,16 +2,20 @@ import React, { Component } from 'react'
 // import './App.css'
 import TodoList from './TodoList'
 import TodoItems from './TodoItems'
+import ls from 'local-storage'
+
+window.onbeforeunload = function() {
+ls.clear();
+return '';
+};
 
 class App extends Component {
+
   inputElement = React.createRef()
   constructor() {
     super()
     this.state = {
-      items: [
-        { text: 'Ritesh', key: 1, isComplete: false, details: "Dummy details" },
-        { text: 'Mukesh', key: 2, isComplete: false, details: "Dummy details" }
-      ],
+      items: ls.get('items') || [],
       currentItem: {
         text: '',
         key: '',
@@ -31,6 +35,7 @@ class App extends Component {
     const filteredItems = this.state.items.filter(item => {
       return item.key !== key
     })
+    ls.set('items', filteredItems)
     this.setState({
       items: filteredItems,
     })
@@ -50,6 +55,7 @@ class App extends Component {
     })
     itemToBeMarkedDone.isComplete = true
     const items = [...filteredItems, itemToBeMarkedDone]
+    ls.set('items', items)
     this.setState({
         items: items,
     })
@@ -116,6 +122,7 @@ class App extends Component {
     const newItem = this.state.currentItem
     if (newItem.text !== '') {
       const items = [...this.state.items, newItem]
+      ls.set('items', items)
       this.setState({
         items: items,
         currentItem: { text: '', key: '' },
@@ -142,14 +149,12 @@ class App extends Component {
     const newItem = this.state.editedItem
     if (newItem.text !== '') {
       const items = [...itemsAfterDeletion, newItem]
+      ls.set('items', items)
       this.setState({
         items: items,
         editedItem: { text: '', key: '' },
       })
     }
-    // document.getElementById(keyToBeDeleted+"readOnlyItem").style.display = "block";
-    // document.getElementById(keyToBeDeleted+"editableItem").style.display = "none";
-
     document.getElementById(keyToBeDeleted+"readOnlyItem").remove();
     document.getElementById(keyToBeDeleted+"editableItem").remove();
   }
