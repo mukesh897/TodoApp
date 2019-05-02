@@ -42,13 +42,14 @@ class App extends Component {
   }
 
   markDone = key => {
-    console.log("Printing state")
-    console.log(this.state)
-    var items = this.state.items
-    const itemToBeMarkedDone = items.filter(item => {
-      return item.key == key
+    const itemToBeMarkedDone = this.state.items.filter(item => {
+      return item.key === key
+    })[0]
+    const filteredItems = this.state.items.filter(item => {
+      return item.key !== key
     })
     itemToBeMarkedDone.isComplete = true
+    const items = [...filteredItems, itemTo]
     this.setState({
         items: items,
     })
