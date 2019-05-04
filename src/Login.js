@@ -55,12 +55,14 @@ export default class Login extends React.Component {
       </div>
 
 
-        <div class= "box-view__box">
-        <p>
-          User 1 = validUser1  Password = 1
-          User 2 = validUser2 Password = validUserPassword2
-          User 3 = validUser3 Password = validUserPassword3
-        </p>
+        <div class= "box-view card">
+
+        <li>User 1 = validUser1  Password = 1 </li>
+        <li>  User 2 = validUser2 Password = validUserPassword2 </li>
+        <li> User 3 = validUser3 Password = validUserPassword3 </li>
+
+
+
       </div>
       </div>
 
