@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './variables.css';
 
 class TodoList extends Component {
   // componentDidUpdate() {
@@ -6,8 +7,10 @@ class TodoList extends Component {
   // }
   render() {
     return (
-      <div className="todoListMain">
-        <div className="header">
+      <div >
+        <div class="page-content">
+          <div>
+
           <form onSubmit={this.props.addItem}>
             <input
               placeholder="Task Title"
@@ -19,8 +22,11 @@ class TodoList extends Component {
               value={this.props.currentItem.details}
               onChange={this.props.handleInputDetails}
             />
-            <button type="submit"> Add Task </button>
+            <div align="center">
+              <button class="btn-floating btn-large waves-effect waves-light red" type="submit"> Add Task </button>
+            </div>
           </form>
+        </div>
         </div>
       </div>
     )

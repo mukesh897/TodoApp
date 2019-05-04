@@ -2,11 +2,13 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import ls from 'local-storage'
 import  { Redirect } from 'react-router-dom'
+import './variables.css';
+
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
-    ls.set('validUser1', 'validUserPassword1');
+    ls.set('validUser1', '1');
     ls.set('validUser2', 'validUserPassword2');
     ls.set('validUser3', 'validUserPassword3');
     ls.set('isUserAuthenticated', false)
@@ -35,12 +37,14 @@ export default class Login extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h1>Short Lnk</h1>
+      <div class="boxed-view">
+      <div class="boxed-view__box">
+        <h1>Todo App</h1>
+
 
         {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-        <form onSubmit={this.onSubmit.bind(this)} noValidate>
+        <form onSubmit={this.onSubmit.bind(this) } noValidate className="boxed-view__form">
           <input type="email" ref="email" name="email" placeholder="Email"/>
           <input type="password" ref="password" name="password" placeholder="Password"/>
           <button class="waves-effect waves-light btn">Login</button>
@@ -49,6 +53,17 @@ export default class Login extends React.Component {
             Sorry, this the userId and password combination do not exist
         </div>
       </div>
+
+
+        <div class= "box-view__box">
+        <p>
+          User 1 = validUser1  Password = 1
+          User 2 = validUser2 Password = validUserPassword2
+          User 3 = validUser3 Password = validUserPassword3
+        </p>
+      </div>
+      </div>
+
     );
   }
 }

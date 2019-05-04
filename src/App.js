@@ -5,13 +5,14 @@ import TodoItems from './TodoItems'
 import ls from 'local-storage'
 import {browserHistory} from 'react-router'
 
+
 window.onbeforeunload = function() {
-ls.clear();
-return '';
+  ls.clear();
+  ls.set('isUserAuthenticated', true)
+  return '';
 };
 
 class App extends Component {
-
   inputElement = React.createRef()
   constructor() {
     super()
@@ -65,6 +66,7 @@ class App extends Component {
     itemToBeMarkedDone.isComplete = true
     const items = [...filteredItems, itemToBeMarkedDone]
     ls.set('items', items)
+    document.getElementById(key+"isCompleteButton").style.display = "none";
     this.setState({
         items: items,
     })
@@ -142,13 +144,13 @@ class App extends Component {
   showDetails = key => {
     document.getElementById(key+"itemDetails").style.display = "block";
     document.getElementById(key+"hideDetailsButton").style.display = "block";
-    document.getElementById(key+"showDetailsButton").style.display = "none";
+    // document.getElementById(key+"showDetailsButton").style.display = "none";
   }
 
   hideDetails = key => {
     document.getElementById(key+"itemDetails").style.display = "none";
     document.getElementById(key+"hideDetailsButton").style.display = "none";
-    document.getElementById(key+"showDetailsButton").style.display = "block";
+    // document.getElementById(key+"showDetailsButton").style.display = "block";
   }
 
   deleteAndAddItem = keyToBeDeleted => {
@@ -170,8 +172,15 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-        <button onClick={this.logOut}>LogOut</button>
+      <div>
+        <div class="header">
+          <div class="header__content">
+            <h1 class="header__title">Todo List</h1>
+            <button onClick={this.logOut} class=" button button--link-text">Logout</button>
+          </div>
+        </div>
+
+        {/* <button class="waves-effect waves-light btn" onClick={this.logOut}>LogOut</button> */}
         <TodoList
           addItem={this.addItem}
           inputElement={this.inputElement}
