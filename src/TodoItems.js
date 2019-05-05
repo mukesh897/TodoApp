@@ -8,7 +8,7 @@ class TodoItems extends Component {
       <li class="item" key={item.key} >
         <div align="center" id={item.key+"readOnlyItem"} class="item card">
           <div >
-            <button class="card-action" onClick={() => this.props.showDetails(item.key)}>ItemTitle: {item.text}</button>
+            <button class="card-action" onClick={() => this.props.toggleDetails(item.key)}>ItemTitle: {item.text}</button>
             <br></br>
             <span class="collection-item" id={item.key+"itemDetails"} hidden={true}>Details: {item.details}</span>
             <br></br>

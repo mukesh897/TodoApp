@@ -141,16 +141,16 @@ class App extends Component {
     }
   }
 
-  showDetails = key => {
-    document.getElementById(key+"itemDetails").style.display = "block";
-    document.getElementById(key+"hideDetailsButton").style.display = "block";
-    // document.getElementById(key+"showDetailsButton").style.display = "none";
-  }
+  toggleDetails = key => {
 
-  hideDetails = key => {
-    document.getElementById(key+"itemDetails").style.display = "none";
-    document.getElementById(key+"hideDetailsButton").style.display = "none";
-    // document.getElementById(key+"showDetailsButton").style.display = "block";
+    var element = document.getElementById(key + "itemDetails")
+
+    if (element.style.display === "block") {
+      element.style.display = "none"
+    } else {
+      element.style.display = "block"
+    }
+
   }
 
   deleteAndAddItem = keyToBeDeleted => {
@@ -197,7 +197,7 @@ class App extends Component {
           editedItem = {this.state.editedItem}
           markDone = {this.markDone}
           deleteAndAddItem = {this.deleteAndAddItem}
-          showDetails = {this.showDetails}
+          toggleDetails = {this.toggleDetails}
           hideDetails = {this.hideDetails}
         />
       </div>
